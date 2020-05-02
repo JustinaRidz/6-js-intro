@@ -129,6 +129,7 @@ function didziausiasSkaiciusSarase( list ){
     if (list.length === 0) {
         return console.error('ERROR: array negali buti tuscias')
     }
+
     // "biggest" = maziausias, bet ne tikras skaicius
     // einame per skaiciu sarasa
        // tikriname ar einamasis skaicius yra tikras skaicius
@@ -136,7 +137,6 @@ function didziausiasSkaiciusSarase( list ){
      // tikriname ar einamasis skaicius yra "biggest"
                // jei taip tai "biggest" = einamas skaicius
      // po visko patikriname ar tai tikras skaicius
-
 
     let biggest = -Infinity;
     for ( let i=0; i< list.length; i++ ){
@@ -173,3 +173,86 @@ console.log( didziausiasSkaiciusSarase( [ Infinity, 1, 3 ] ), '->', 3);
 console.log( didziausiasSkaiciusSarase( [ 1, Infinity, Infinity ] ), '->', 1);
 console.log( didziausiasSkaiciusSarase( [ Infinity, 1, Infinity ] ), '->', 1);
 console.log( didziausiasSkaiciusSarase( [ Infinity, Infinity, 1 ] ), '->', 1);
+
+
+
+console.log('--------------------------');
+console.log('ISRINKTI RAIDES')
+console.log('--------------------------');
+
+function isrinktiRaides( text, step ){
+    if (typeof(text) !== 'string') {
+        return console.error('ERROR: pirma reiksme turi buti teksto tipo');
+    }
+    if (text === ''){    
+        return  console.error('ERROR: tekstas negali buti tuscias');
+    }
+    if (isFinite(step) === false ){
+        return console.error('ERROR: antra reiksme turi buti normalus skaicius');
+    }
+    if (step === 0 ){
+        return console.error('ERROR: zingsnis negali buti nulis');
+    }
+    if (step > text.length){
+        return console.error('ERROR: antra riksme negali buti didesnis uz turimo teksto ilgi');
+    }
+    
+    if (step % 1 !== 0 ){
+        return console.error('ERROR: zinksnis turi buti sveikasis skaicius');
+    }
+    // logika
+    let newWord = '';
+    // jei tekste yra neigiamas skaiciius
+    if ( step > 0 ){
+        for ( let i=step-1; i<text.length; i=i+step ){
+        newWord = newWord + text[i];
+        }
+    } else { 
+        for ( let i=text.length+step; i>=0; i=i+step ){
+        newWord = newWord + text[i];
+        }
+        
+    }
+    
+    // for ( let i=0; i<text.length; i++){
+        // if (i % step === step - 1 ){
+        // console.log( text[i], i, i % step );
+        // newWord = newWord + text[i];
+        // }
+    // }
+    return newWord;
+}
+console.log( isrinktiRaides( 1561, 2 ) );
+console.log( isrinktiRaides( '', 0 ) );
+console.log( isrinktiRaides( 'abc', 0 ) );
+console.log( isrinktiRaides( 'abc', 4 ) );
+console.log( isrinktiRaides( 'abcdefghijkl', 1.5) );
+console.log( isrinktiRaides( 'abcdefghijkl', Infinity) );
+console.log( isrinktiRaides( 'abcdefghijkl', NaN) );
+
+console.log( isrinktiRaides( 'abcdefg', 2 ), '->', 'bdf' );
+console.log( isrinktiRaides( 'abcdefghijkl', 3 ), '->', 'cfil' );
+console.log( isrinktiRaides( 'abcdefghijkl', 1 ), '->', 'abcdefghijkl' );
+
+console.log( isrinktiRaides( 'abcdefg', -2 ), '->', 'fdb' );
+console.log( isrinktiRaides( 'abcdefghijkl', -3 ), '->', 'jgda' );
+console.log( isrinktiRaides( 'asdfghjkl', -1), '->', 'lkjhgfdsa' );
+
+console.log('--------------------------');
+console.log('DALYBA')
+console.log('--------------------------');
+
+function dalyba( a, b ) {
+    if ( !isFinite(a) ||
+         !isFinite(b) ) {
+             return console.error('ERROR: duok normalu skaiciu');
+         }
+    return a/b;
+}
+
+console.log( dalyba(Infinity, 4) );
+console.log( dalyba(8, Infinity) );
+console.log( dalyba( 8, 0) );
+console.log( dalyba(8, 4) );
+console.log( dalyba(0, 4) );
+
